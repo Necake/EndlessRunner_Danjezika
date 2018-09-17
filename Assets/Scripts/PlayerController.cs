@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     int playerLane;
@@ -28,6 +29,16 @@ public class PlayerController : MonoBehaviour {
         }
 
         transform.position = Vector3.MoveTowards(transform.position, dest, Time.deltaTime * moveSpeed);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //if its a mine then die lol
+        if(other.gameObject.CompareTag("Traps"))
+        {
+            SceneManager.LoadScene(1); //game over scene
+        }
+        
     }
 
 }
