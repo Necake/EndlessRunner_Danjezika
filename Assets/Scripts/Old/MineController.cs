@@ -12,7 +12,7 @@ public class MineController : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
         velocity = new Vector3(0, -speed, 0);
         rb.velocity = velocity;
 	}

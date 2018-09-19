@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainGameLogic : MonoBehaviour {
+public class MainGameLogic : MonoBehaviour
+{
     float timer, mineSpeed;
-    public float maxMineSpeed = 17.0f , mineDensity = 0.75f, gameSpeed = 0.8f;
+    public float maxMineSpeed = 17.0f, mineDensity = 0.75f, gameSpeed = 0.8f;
     public Transform leftLaneSpawner, midLaneSpawner, rightLaneSpawner;
-    public GameObject minePrefab;
-	// Use this for initialization
-	void Start () {
+    public GameObject minePrefab, background;
+    // Use this for initialization
+    void Start()
+    {
         ResetTimer();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         timer -= Time.deltaTime;
-        if(timer <= 0)
+        if (timer <= 0)
         {
             int spawnCombo = Random.Range(0, 12);
             spawnObstacles(spawnCombo);
             ResetTimer();
         }
-		
-	}
+
+    }
 
     void ResetTimer()
     {
@@ -31,12 +34,13 @@ public class MainGameLogic : MonoBehaviour {
         mineSpeed = (-timer + maxMineSpeed / 2) / 0.4f;
         timer /= gameSpeed * mineDensity;
         mineSpeed *= gameSpeed;
+        background.GetComponent<BackgroundMovement>().movementSpeed = mineSpeed;
         Debug.Log(timer);
     }
 
     void spawnObstacles(int spawnCombo)
     {
-        switch(spawnCombo)
+        switch (spawnCombo)
         {
             case 0:
             case 1:
